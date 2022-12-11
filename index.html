@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Ocen</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="app.js" defer></script>
+    <script src="csv.min.js"></script>
+</head>
+
+<body>
+
+    <div class="form-style-5" >
+        <form method="post" id="student-form">
+
+            <legend><span class="number">1</span>Informacje o studencie</legend>
+
+            <div>
+                <label for="type">Tryb studiów </label>
+                <select name="type" id="study" required>
+                    <option value="dzienne">Dzienne</option>
+                    <option value="wieczorowe">Wieczorowe</option>
+                    <option value="zaoczne">Zaoczne</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="year">Rok studiów</label>
+                <select name="year" id="year" required>
+                    <option value="1 rok">1</option>
+                    <option value="2 rok">2</option>
+                    <option value="3 rok">3</option>
+                    <option value="4 rok">4</option>
+                    <option value="5 rok">5</option>
+                </select>
+            </div>
+
+            <input id="firstName" type="text" name="firstName" placeholder="Imię *">
+            <input id="surname" type="text" name="surname" placeholder="Nazwisko *">
+            <input id="email" type="email" name="email" placeholder="Email *">
+            <input id="studentId" type="text" name="studentId" placeholder="Numer albumu *">
+            
+            <div>
+                <label for="subject">Przedmiot</label>
+                <select name="subject" id="subject" required>
+                    <option value="dzienne">Programowanie Aplikacji Internetowych </option>
+                </select>
+            </div>
+
+            <legend><span class="number">2</span>Informacje o ocenach</legend>
+
+            <label for="test1">Test: 80% oceny</label>
+            <label for="test1">Prace domowe 10% oceny</label>
+            <label for="test1">Obecność 10% oceny - zakładamy, że wszyscy studenci byli obecni</label>
+
+            <label for="test1">proszę podać wynik w procentach bez znaku "%" </label>
+            <input type="number" id="test1" placeholder="Test 1" name="test1" min="0" max="100" required>
+            <input type="number" id="test2" placeholder="Test 2" name="test2" min="0" max="100" required>
+            <input type="number" id="test3" placeholder="Test 3" name="test3" min="0" max="100" required>
+            <input type="number" id="homework" placeholder="Praca domowa" name="homework" min="0" max="100" required>
+            
+            <input type="submit" value="Apply" />
+            <label id="result">
+
+            </label>
+        </form>
+    </div>
+</body>
+
+</html>
