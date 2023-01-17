@@ -1,30 +1,29 @@
 
+const students = [];
+
+
 document.getElementById("student-form").onsubmit = function (e) {
     e.preventDefault();
     const form = e.target;
     const formFields = form.elements;
     let validationErrors = validateFormInput(formFields);
     if (validationErrors && validationErrors.length > 0) {
-        //   document.getElementById('errors').textContent = '';
-        //   validationErrors.forEach(err => {
-        //     var errorDiv = document.createElement("div");
-        //     errorDiv.classList.add('error');
-        //     errorDiv.innerText = err;
-        //     document.getElementById('errors').appendChild(errorDiv);
-        //   });
-        //   document.getElementById("errors").classList.remove('invisible');
-        console.log('validation error');
-    } else {
+        document.getElementById('errors').textContent = '';
+        validationErrors.forEach(err => {
+          var errorDiv = document.createElement("div");
+          errorDiv.classList.add('error');
+          errorDiv.innerText = err;
+          document.getElementById('errors').appendChild(errorDiv);
+        });
+        document.getElementById("errors").classList.remove('invisible');
+      } else {
         // show data and success
-        //   form.classList.add('invisible');
-        //   document.getElementById("result-container").classList.remove('invisible');
-        //   document.getElementById("errors").classList.add('invisible');
-
+        form.classList.add('invisible');
+        document.getElementById("errors").classList.add('invisible');
+        document.getElementById("result").classList.remove('invisible');
         fillResultData(formFields);
-    }
-    // returning false preventing the form from the default submit flow
-    return false;
-};
+      }
+    };
 
 
 
@@ -39,7 +38,10 @@ function fillResultData(formFields) {
     z testu2 ${test2.value} punktów, z testu3: ${test3.value} punktów, z prac domowych: ${homework.value} punktów - 
     co daje średnią ${averageMarkAsLetter}`;
 
-    document.getElementById("result").innerText = resultText;
+    students.push(resultText);
+    
+    document.getElementById("content").innerHTML = printing();
+
     const studentData = {
         studentId: studentId.value,
         firstName: firstName.value,
@@ -48,7 +50,21 @@ function fillResultData(formFields) {
         averageMarkAsLetter,
     };
     saveCSV(studentData);
+
+
 }
+
+function printing(){
+    
+    var printThis = "";
+    for(var i = 0; i < students.length; i++){
+        printThis +=  "<br>"+ (i+1)+": " +students[i] + "."+"<br>";
+    }
+    return printThis;
+}
+
+
+
 
 function calculateAverage(test1, test2, test3, homework) {
     let testAvg = ((parseInt(test1) + parseInt(test2) + parseInt(test3)) * 8) / 30;
@@ -81,6 +97,7 @@ function validateFormInput(formFields) {
     const firstName = formFields.firstName.value;
     const surname = formFields.surname.value;
     const email = formFields.email.value;
+    const id = formFields.studentId.value;
     let errors = [];
 
     if (!validateNameSurname(firstName)) {
@@ -92,8 +109,12 @@ function validateFormInput(formFields) {
     if (!validateEmail(email)) {
         errors.push('Email field is invalid');
     }
+    if(!validateId(id)){
+        errors.push('Id field is invalid');
+    }
     return errors;
 }
+
 function validateNameSurname(name) {
     var regName = /^[a-zA-Z\s-]*$/;
     return name && regName.test(name);
@@ -104,6 +125,10 @@ function validateEmail(email) {
     return email && regName.test(email);
 }
 
+function validateId(id) {
+    var regName = /^[0-9]{1,6}$/;
+    return id && regName.test(id);
+}
 
 
 async function saveCSV(studentData) {
@@ -134,3 +159,14 @@ async function saveCSV(studentData) {
     await fileStream.write(blob);
     await fileStream.close();
 }
+
+function loadDoc() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+    xhttp.open("GET", "https://catfact.ninja/fact");
+    xhttp.send();
+  }
+  

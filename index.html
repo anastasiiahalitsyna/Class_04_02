@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator Ocen</title>
     <link rel="stylesheet" href="css/style.css">
-    <script type="text/javascript" src="app.js" defer></script>
+ <script type="text/javascript" src="app.js" defer></script>
     <script src="csv.min.js"></script>
+
 </head>
 
 <body>
@@ -38,10 +39,10 @@
                 </select>
             </div>
 
-            <input id="firstName" type="text" name="firstName" placeholder="Imię *">
-            <input id="surname" type="text" name="surname" placeholder="Nazwisko *">
-            <input id="email" type="email" name="email" placeholder="Email *">
-            <input id="studentId" type="text" name="studentId" placeholder="Numer albumu *">
+            <input id="firstName" type="text" name="firstName" placeholder="Imię *" required minlength=2 maxlength="45">
+            <input id="surname" type="text" name="surname" placeholder="Nazwisko *" required minlength=2 maxlength="45">
+            <input id="email" type="email" name="email" placeholder="Email *" >
+            <input id="studentId" type="text" name="studentId" placeholder="Numer albumu *" required maxlength="6">
             
             <div>
                 <label for="subject">Przedmiot</label>
@@ -63,11 +64,27 @@
             <input type="number" id="homework" placeholder="Praca domowa" name="homework" min="0" max="100" required>
             
             <input type="submit" value="Apply" />
+            
             <label id="result">
 
             </label>
+            <div id="content">
+<br>
+            </div>
+            <div class="invisible" id="errors">
+            </div>
+
         </form>
     </div>
+
+    
+    <div class="form-style-5" id="demo">
+        <h2>Aby zobaczyć losowe fakty o kotach:</h2>
+        <button class="myButton" type="button" onclick="loadDoc()">Fakt</button>
+        </div>
+        
+
+
 </body>
 
 </html>
